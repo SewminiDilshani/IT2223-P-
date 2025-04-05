@@ -1,0 +1,10 @@
+/*
+Display 1 to numbers using whileloop
+*/
+
+i=1;
+disp("The numbers of 1 to 10: ");
+while i<=10
+    disp(i);
+    i=i+1;
+end
