@@ -1,0 +1,99 @@
+function student_club_voting_system()
+    % Define the list of candidates
+    candidates = {'Candidate A', 'Candidate B', 'Candidate C', 'Candidate D'};
+    
+    % Initialize vote counts for each candidate
+    voteCounts = zeros(1, 4);
+
+    % Ask the user how many voters there will be
+    numVoters = input('Enter the total number of voters: ');
+
+    % Loop through each voter
+    for i = 1:numVoters
+        % Display the voting menu
+        fprintf('Voting Menu:\n');
+        fprintf('1. %s\n', candidates{1});
+        fprintf('2. %s\n', candidates{2});
+        fprintf('3. %s\n', candidates{3});
+        fprintf('4. %s\n', candidates{4});
+        
+        % Input the vote
+        vote = input('Enter your choice (1-4): ');
+
+        % Increment the vote count based on the voter's choice
+        switch vote
+            case 1
+                voteCounts(1) = voteCounts(1) + 1;
+            case 2
+                voteCounts(2) = voteCounts(2) + 1;
+            case 3
+                voteCounts(3) = voteCounts(3) + 1;
+            case 4
+                voteCounts(4) = voteCounts(4) + 1;
+            otherwise
+                % Handle invalid vote input
+                fprintf('Invalid vote! Please enter a number between 1 and 4.\n');
+        end
+    end
+
+    % After voting ends, show the vote counts
+    fprintf('\nVote Counts:\n');
+    for j = 1:length(candidates)
+        fprintf('%s: %d votes\n', candidates{j}, voteCounts(j));
+    end
+
+    % Find and announce the winner
+    [maxVotes, winnerIndex] = max(voteCounts);
+    fprintf('The winner is %s with %d votes!\n', candidates{winnerIndex}, maxVotes);
+
+    % Start a menu for visualization
+    while true
+        fprintf('\nVisualization Menu:\n');
+        fprintf('1. Show Bar Chart of Votes\n');
+        fprintf('2. Show Pie Chart of Votes\n');
+        fprintf('3. Show Scatter Plot of Votes\n');
+        fprintf('4. Exit\n');
+        
+        % Input user's visualization choice
+        choice = input('Enter your choice (1-4): ');
+
+        % Display different plots based on user's choice
+        switch choice
+            case 1
+                % Bar chart
+                figure;
+                bar(voteCounts);
+                title('Vote Counts for Candidates');
+                xlabel('Candidates');
+                ylabel('Number of Votes');
+                set(gca, 'XTickLabel', candidates);
+                grid on;
+                legend('Votes');
+                
+            case 2
+                % Pie chart
+                figure;
+                pie(voteCounts, candidates);
+                title('Vote Distribution among Candidates');
+                
+            case 3
+                % Scatter plot
+                figure;
+                scatter(1:length(candidates), voteCounts, 100, 'filled');
+                title('Scatter Plot of Votes');
+                xlabel('Candidates');
+                ylabel('Number of Votes');
+                set(gca, 'XTick', 1:length(candidates), 'XTickLabel', candidates);
+                grid on;
+                
+            case 4
+                % Exit the visualization menu
+                fprintf('Exiting the visualization menu.\n');
+                return;
+                
+            otherwise
+                % Handle invalid visualization choice
+                fprintf('Invalid choice! Please enter a number between 1 and 4.\n');
+        end
+    end
+end
